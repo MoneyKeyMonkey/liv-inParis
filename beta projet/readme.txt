@@ -7,3 +7,5 @@ A terme j'aimerais fusionner son contenu avec le nouveau projet et pourquoi pas 
 
 merci au lecteur.
 Andres
+
+PS veillez a avoir MySQL d'ouvert
