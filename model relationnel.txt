@@ -1,0 +1,11 @@
+utilisateur = (id VARCHAR(50), prénom VARCHAR(50), email VARCHAR(50), num_tel VARCHAR(50), adresse VARCHAR(50), entreprise VARCHAR(50), mdp VARCHAR(50), nom VARCHAR(50));
+client = (id_client VARCHAR(50), #id);
+cuisinier = (id_cuisinier VARCHAR(50), #id);
+commande = (id_commande VARCHAR(50), heure_date VARCHAR(50), #id_cuisinier, #id_client);
+avis = (id_avis VARCHAR(50), retour_cusinier VARCHAR(50), retour_client VARCHAR(50), date_avis VARCHAR(50), #id_commande);
+livraison = (id_livraison VARCHAR(50), heure_date_de_livraison VARCHAR(50));
+plat = (id_plat VARCHAR(50), nom VARCHAR(50), prix VARCHAR(50), origine_region VARCHAR(50), photo_du_plat VARCHAR(50));
+ingrédients = (id_ingrédients VARCHAR(50), nom_ingrédients VARCHAR(50), provenance VARCHAR(50), type VARCHAR(50));
+ligne_de_commande = (id_ligne_de_commande VARCHAR(50), #id_commande, #id_client, #id_livraison);
+inclue = (#id_ligne_de_commande, #id_plat);
+contient = (#id_plat, #id_ingrédients, quantite VARCHAR(50));

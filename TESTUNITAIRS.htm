@@ -1,0 +1,80 @@
+
+J4AI PAS RETROUVE L4ENREGISTREMENT DE LA DEMONSTRATION ...
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Drawing;
+
+namespace liv_inParis.Tests
+{
+    [TestClass]
+    public class GraphTests
+    {
+        [TestMethod]
+        public void CalculateDegrees_ShouldReturnCorrectDegrees()
+        {
+            // Arrange
+            var edges = new List<Tuple<int, int>>
+            {
+                Tuple.Create(1, 2),
+                Tuple.Create(1, 3),
+                Tuple.Create(2, 3)
+            };
+            var graph = new Graph(edges);
+
+            // Act
+            var degrees = graph.Degrees;
+
+            // Assert
+            Assert.AreEqual(0, degrees[0]); // Nœud 0 non utilisé
+            Assert.AreEqual(2, degrees[1]);  // 2 connexions
+            Assert.AreEqual(2, degrees[2]);  // 2 connexions
+            Assert.AreEqual(1, degrees[3]);  // 1 connexion
+        }
+
+        [TestMethod]
+        public void GetRadius_ShouldScaleBetweenMinMax()
+        {
+            // Arrange
+            var edges = new List<Tuple<int, int>>
+            {
+                Tuple.Create(1, 2),
+                Tuple.Create(1, 3)
+            };
+            var graph = new Graph(edges);
+
+            // Act
+            int radiusForDegree2 = graph.GetRadius(1);
+            int radiusForDegree1 = graph.GetRadius(3);
+
+            // Assert
+            Assert.IsTrue(radiusForDegree2 > radiusForDegree1);
+            Assert.IsTrue(radiusForDegree2 >= 10 && radiusForDegree2 <= 30);
+        }
+
+        [TestMethod]
+        public void InitializePoints_ShouldPlaceHighDegreeNodesCentrally()
+        {
+            // Arrange
+            var edges = new List<Tuple<int, int>>
+            {
+                Tuple.Create(1, 2),
+                Tuple.Create(1, 3),
+                Tuple.Create(1, 4)
+            };
+            var graph = new Graph(edges);
+            int centerX = 400;
+            int centerY = 300;
+            int tolerance = 50;
+
+            // Act
+            Point node1Position = graph.Points[1];
+
+            // Assert
+            Assert.IsTrue(node1Position.X >= centerX - tolerance && 
+                          node1Position.X <= centerX + tolerance);
+            Assert.IsTrue(node1Position.Y >= centerY - tolerance && 
+                          node1Position.Y <= centerY + tolerance);
+        }
+    }
+}
